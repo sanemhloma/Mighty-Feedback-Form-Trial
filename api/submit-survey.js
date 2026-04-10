@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   }
  
   // Validate API key
-  const apiKey = req.headers["x-api-key"];
+  const apiKey = req.headers["MightyFeedbackDL"];
   if (apiKey !== process.env.PROXY_KEY) {
     return res.status(401).json({ error: "Unauthorized" });
   }
