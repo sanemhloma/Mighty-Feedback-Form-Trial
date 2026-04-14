@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // url where data is sent from (LHUB)
   const allowedOrigin = "https://cpcontents.adobe.com";
  
   // Set CORS headers for all responses
@@ -11,13 +10,15 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
+
+  console.log("Headers:", req.headers);
  
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
  
   // Validate API key
-  const apiKey = req.headers["MightyFeedbackDL"];
+  const apiKey = req.headers["x-api-key"];
   if (apiKey !== process.env.PROXY_KEY) {
     return res.status(401).json({ error: "Unauthorized" });
   }
